@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="solutionSelectionDialog">
+		<item value="1" key="applyScope"/>
+	</section>
+	<section name="com.tomato.exerd.export.ModelExportWizardDialog">
+		<item value="701" key="DIALOG_WIDTH"/>
+		<item value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕" key="DIALOG_FONT_NAME"/>
+		<item value="clipboard" key="sendType"/>
+		<item value="HTML 표(기본)" key="lastUsedTemplateName"/>
+		<item value="" key="destinationPath"/>
+		<item value="670" key="DIALOG_HEIGHT"/>
+		<item value="587" key="DIALOG_X_ORIGIN"/>
+		<item value="102" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="solution">
+		<item value="ASK_TO_USER" key="whenRemoveFK.en"/>
+		<item value="ASK_TO_USER" key="addTableDiagram"/>
+		<item value="ASK_TO_USER" key="unknownDomain"/>
+		<item value="ASK_TO_USER" key="whenRemoveFK"/>
+		<item value="ASK_TO_USER" key="experimentalFunction"/>
+		<item value="ASK_TO_USER" key="shoudReuseColumnForRelation"/>
+		<item value="ASK_TO_USER" key="removeDomain"/>
+		<item value="ASK_TO_USER" key="removeRelation"/>
+		<item value="ASK_TO_USER" key="removeReferredColumn"/>
+		<item value="ASK_TO_USER" key="outOfSync"/>
+		<item value="ASK_TO_USER" key="xmlContentWithoutErdxExtension"/>
+		<item value="ASK_TO_USER" key="sendToBusinessArea"/>
+	</section>
+	<section name="com.tomato.exerd.export.ExportModelWizard">
+		<list key="templateContents">
+		</list>
+		<list key="templateNames">
+		</list>
+	</section>
+</section>

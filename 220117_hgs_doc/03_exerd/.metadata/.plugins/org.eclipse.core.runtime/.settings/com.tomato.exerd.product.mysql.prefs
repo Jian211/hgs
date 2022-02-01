@@ -1,0 +1,9 @@
+#Fri Jan 28 16:04:58 KST 2022
+com.tomato.exerd.preference.PropertyPagePrefConstants.mysql.DROP_TABLE=false
+com.tomato.exerd.preference.PropertyPagePrefConstants.mysql.TABLE_FEATURE_USE_OWNER_PREFIX=false
+eclipse.preferences.version=1
+com.tomato.exerd.preference.PropertyPagePrefConstants.mysql.TABLE_FEATURE_USE_COMMENT=NONE
+com.tomato.exerd.preference.PropertyPagePrefConstants.mysql.USE_SCHEMA_PHYSICAL_PROPERTIES=false
+com.tomato.exerd.preference.PropertyPagePrefConstants.mysql.TABLE_FEATURE_DELIMITED_IDENTIFIER=NONE
+com.tomato.exerd.preference.PropertyPagePrefConstants.mysql.CREATE_SCHEMA=false
+com.tomato.exerd.preference.PropertyPagePrefConstants.mysql.DROP_SCHEMA=false
