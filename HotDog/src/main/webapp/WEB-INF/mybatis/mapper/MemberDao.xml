@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--  namespace에는 interface의 전체 이름을 기입 -->
+<mapper namespace="com.bitcamp.myapp.member.dao.MemberDao">
+
+	<!-- select의 결과를 매핑해주는 설정 -->
+	<resultMap type="com.bitcamp.myapp.member.domain.Member2" id="memberResult">
+		<id column="idx" property="index"/>
+		<result column="userid" property="uid"/>
+		<result column="username" property="membername"/>
+		<result column="photo" property="memberphoto"/>
+		<result column="regdate" property="date"/>
+	</resultMap>
+
+
+	<!-- interface의 추상메소드 이름을 id의 속성값으로 지정  -->
+	<!-- <select id="selectByIdPw" 
+			parameterType="com.bitcamp.op.member.domain.LoginParams"
+			resultType="com.bitcamp.op.member.domain.Member"
+	> -->
+	
+	<select id="selectByIdPw" resultType="com.bitcamp.myapp.member.domain.Member"> 
+		<!-- 파라미터의 값의 구분은 매개변수 순서에 따라 구분 -->
+		select * from member where userid=#{userid} and password=#{password}
+	<!--	select * from member where password=#{param2} and userid=#{param1}  -->
+	</select>
+	
+	<select id="selectById" resultType="com.bitcamp.myapp.member.domain.Member"> 
+		<!-- 파라미터의 값의 구분은 매개변수 순서에 따라 구분 -->
+		select * from member where userid=#{userid}
+	<!--	select * from member where password=#{param2} and userid=#{param1}  -->
+	</select>
+	
+	
+	<select id="selectTotalCount"
+			parameterType="hashMap"
+			resultType="int">
+									
+			select count(*) from member
+			<where>
+				<if test="searchType != null"> 
+					<if test="searchType == 'uid'">
+						<include refid="searchId"/>
+					</if>
+					<if test="searchType == 'uname'">
+						<include refid="searchName"/>
+					</if>
+					<if test="searchType == 'both'">
+						<include refid="searchId"/>
+						<include refid="searchName"/>
+					</if>
+				</if>
+			</where>
+	</select>
+	
+	<sql id="searchId"> 
+		or userid like concat('%', #{keyword}, '%')
+	</sql>
+	
+	<sql id="searchName">
+		or username like concat('%', #{keyword}, '%')
+	</sql>
+	
+	
+	
+	
+	
+	<select id="selectList"
+			parameterType="com.bitcamp.myapp.member.domain.SearchParams"
+			resultType="com.bitcamp.myapp.member.domain.Member">
+	<!-- <select id="selectList"			
+			resultType="com.bitcamp.op.member.domain.Member"> -->
+	
+	select * from member
+	
+	<where>
+		<if test="searchType != null">
+		
+			<if test="searchType == 'uid'">
+				<include refid="searchId"/>
+			</if>
+			<if test="searchType == 'uname'">
+				<include refid="searchName"/>
+			</if>
+			<if test="searchType == 'both'">
+				<include refid="searchId"/>
+				<include refid="searchName"/>
+			</if>
+		
+		</if>
+	</where>
+	
+	 order by idx desc limit #{index}, #{count}
+	
+	</select>
+	
+	<insert id="insertMember"
+			parameterType="com.bitcamp.myapp.member.domain.MemberRegRequest"
+			useGeneratedKeys="true"
+			keyProperty="idx">
+			
+		INSERT INTO member (userid, password, username, photo)
+ 		VALUES (#{userid},#{pw},#{username},#{fileName})
+		
+	
+	</insert>
+	
+	
+	<select id="selectByIdx" resultType="com.bitcamp.myapp.member.domain.Member">
+	
+		select * from member where idx=#{no}
+	</select>
+	
+	<select id="selectByIdx2"
+			resultMap="memberResult">
+		select * from member where idx=#{no}
+	</select>
+	
+	<delete id="deleteByIdx">
+		delete from member where idx=#{idx}
+	</delete>
+	
+<!-- 	<update id="editMember"	parameterType="com.bitcamp.myapp.member.domain.EditRequest"> -->
+	
+<!-- 		update member -->
+<!-- 		set  -->
+<!-- 		username=#{username}, -->
+<!-- 		password=#{pw} -->
+		
+<!-- 		<if test="fileName != null"> -->
+<!-- 		, photo=#{fileName}		 -->
+<!-- 		</if>  -->
+		
+<!-- 		where idx=#{idx} -->
+	
+<!-- 	</update> -->
+	
+	
+	
+	
+	
+</mapper>
