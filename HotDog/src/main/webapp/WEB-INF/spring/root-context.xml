@@ -28,16 +28,16 @@
 	/>
 	
 	<!-- SqlSessionFactory : Mybatis + Spring 연동 -->
-<!-- 	<bean -->
-<!-- 		id="sqlSessionFactory" -->
-<!-- 		class="org.mybatis.spring.SqlSessionFactoryBean" -->
-<!-- 		p:dataSource-ref="dataSource" -->
-<!-- 		p:mapperLocations="WEB-INF/mybatis/mapper/*.xml" -->
-<!-- 	/> -->
+	<bean
+		id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean"
+		p:dataSource-ref="dataSource"
+		p:mapperLocations="WEB-INF/mybatis/mapper/*.xml"
+	/>
 	
-<!-- 	<bean id="sqlSession"  -->
-<!-- 		class="org.mybatis.spring.SqlSessionTemplate"> -->
-<!-- 		<constructor-arg ref="sqlSessionFactory" /> -->
-<!-- 	</bean> -->
+	<bean id="sqlSession" 
+		class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory" />
+	</bean>
 	
 </beans>

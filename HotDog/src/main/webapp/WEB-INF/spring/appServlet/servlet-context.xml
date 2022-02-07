@@ -29,7 +29,7 @@
 	<beans:bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<beans:property name="defaultEncoding">
-			<beans:value>utf-8</beans:value>
+			<beans:value>UTF-8</beans:value>
 		</beans:property>
 	</beans:bean>
 	
