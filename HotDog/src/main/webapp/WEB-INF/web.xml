@@ -50,7 +50,7 @@
 	</filter-mapping>
 	
 	<welcome-file-list>
-		<welcome-file>/WEB-INF/views/index.jsp</welcome-file>
+		<welcome-file>/WEB-INF/views/home/login.jsp</welcome-file>
 	</welcome-file-list>
 
 

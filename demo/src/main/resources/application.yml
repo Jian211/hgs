@@ -1,0 +1,21 @@
+spring:
+  # 라이브러리 추가 후 미설정 시 > boot 실행 x  
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/project?servertimzone=UTC
+    username: bit
+    password: bit
+   
+  thymeleaf:
+    prefix: classpath:templates/
+    check-template-location: true
+    suffix: .html
+    mode: HTML5
+    cache: false
+    template-resolver-order: 
+    
+mybatis:
+  mapper-locations: com/example/demo/member/mapper/*.xml
+  
+server:
+  port: 8083

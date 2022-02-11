@@ -9,7 +9,7 @@
 	<bean id="dataSource"
 			class="com.zaxxer.hikari.HikariDataSource"
 			p:driverClassName="com.mysql.cj.jdbc.Driver"
-			p:jdbcUrl="jdbc:mysql://database-op-mysql.cdupmgw1wjrv.ap-northeast-2.rds.amazonaws.com:3306/project?serverTimezone=UTC"
+			p:jdbcUrl="jdbc:mysql://localhost:3306/project?serverTimezone=UTC"
 			p:username="jian"
 			p:password="jian"
 			
@@ -33,8 +33,8 @@
 		class="org.mybatis.spring.SqlSessionFactoryBean"
 		p:dataSource-ref="dataSource"
 		p:mapperLocations="WEB-INF/mybatis/mapper/*.xml"
+		p:configLocation="WEB-INF/mybatis/mybatis-config.xml"
 	/>
-	
 	<bean id="sqlSession" 
 		class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory" />

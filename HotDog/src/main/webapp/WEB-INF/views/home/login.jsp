@@ -3,6 +3,7 @@
 <html>
 <head>
 	<title>핫핫!! 핫한 개들의 수다</title>
+	<%@ include file="/WEB-INF/views/frame/pageSet.jsp" %>
 </head>
 <body>
 	<form method="post">
@@ -17,7 +18,7 @@
 		<div>구글 로그인</div>
 		<div>카카오톡 로그인</div>
 	</form>
-	<div>아직 회원이 아니신가요?<a href="join">회원가입하기</a></div>
+	<div>아직 회원이 아니신가요?<a href="joinType">회원가입하기</a></div>
 
 </body>
 <script>

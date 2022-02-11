@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--  namespace에는 interface의 전체 이름을 기입 -->
+<mapper namespace="com.bitcamp.op.guestbook.dao.GuestBookDao">
+
+	<select id="selectList"
+			resultType="com.bitcamp.op.guestbook.domain.GuestBookListMessage">
+			
+		select 
+			g.idx as idx , 
+			g.subject as subject, 
+			g.content as content, 
+			g.regdate as regdate, 
+			m.username as username, 
+			m.photo as photo ,
+    		(select count(*) from project.reply r where g.idx=r.guestbookidx) as replyCnt
+		from 
+			guestbook g join member m 
+		on g.memberidx=m.idx 
+		order by idx desc 
+		limit #{param1}, #{param2}
+	
+	</select>
+	
+	<select id="selectByIdx"
+			resultType="com.bitcamp.op.guestbook.domain.PageView"
+	>
+	
+	select 
+		g.idx as idx, 
+		g.subject as subject, 
+		g.content as content, 
+		m.username as username, 
+		g.regdate as regdate, 
+		m.photo as photo, 
+		m.idx as memberidx, 
+		m.userid as userid 
+	from project.guestbook g join project.member m 
+	on g.memberidx=m.idx 
+	where g.idx=#{idx}
+	</select>
+	
+	<select id="selectReplyList"
+			resultType="com.bitcamp.op.guestbook.domain.ReplyListItem"
+	>
+		select 
+			r.idx, 
+			r.content, 
+			r.regdate, 
+			r.memberidx, 
+			r.guestbookidx, 
+			m.username, 
+			m.photo 
+		from member m join reply r 
+		on m.idx=r.memberidx 
+		where r.guestbookidx=#{idx}
+	</select>
+	
+	
+	
+	
+	
+	
+</mapper>
