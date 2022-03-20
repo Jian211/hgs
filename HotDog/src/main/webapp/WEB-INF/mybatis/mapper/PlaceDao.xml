@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--  namespace에는 interface의 전체 이름을 기입 -->
+<mapper namespace="com.bitcamp.hgs.place.dao.PlaceDao">
+
+	<!--  추천 장소 전체  목록 보기 -->
+	<select id="selectList"
+			resultType="com.bitcamp.hgs.place.domain.Places">	
+		SELECT 
+	   		p.place_idx,
+	   		p.title,
+	   		p.new_address,
+       		p.subject_category,
+       		pf.file_name
+    	FROM places p left outer join place_files pf on (p.place_idx = pf.place_idx)
+        ORDER BY p.place_idx desc limit #{param1}, #{param2} 
+       
+	</select>
+	
+	<!-- 추천 장소 상세보기 -->
+	<select id="selectByIdx"
+			resultType="com.bitcamp.hgs.place.domain.Places">
+		SELECT
+	   		p.place_idx, 
+	   		p.title,
+       		p.old_address,
+       		p.new_address,
+       		p.phone,
+       		p.affiliation,
+       		p.subject_category,
+       		p.homepage,
+       		pf.file_name
+       FROM places p left outer join place_files pf on (p.place_idx = pf.place_idx)
+	   WHERE p.place_idx=#{idx} 
+	</select>
+	
+	<!-- 추천 장소 등록 -->
+	<insert id="registPlace"
+			parameterType="com.bitcamp.hgs.place.domain.RegPlace"
+			useGeneratedKeys="true"
+			keyProperty="placeIdx">
+			
+		INSERT INTO hgs.places (admin_idx,title, subject_category, affiliation, old_address, new_address, homepage, phone)
+ 	 VALUES (#{adminIdx},#{title},#{subjectCategory},#{affiliation},#{oldAddress},#{newAddress},#{homepage},#{phone})
+	</insert>
+	
+	<!-- 추천 장소 삭제 -->
+	<delete id="deletePlace">
+		DELETE FROM hgs.places where place_idx=#{placeIdx}
+	</delete>
+	
+	<!-- 추천 장소 수정 -->
+	<update id="updatePlace"
+			parameterType="com.bitcamp.hgs.place.domain.Places">
+		UPDATE hgs.places SET
+		title = #{title},
+		old_address = #{oldAddress},
+		new_address = #{newAddress},
+		phone = #{phone}, 
+		affiliation = #{affiliation}
+		where place_idx = #{placeIdx}
+	</update>
+	
+	<!-- 파일 등록  -->
+	<insert id="insertFile">
+	INSERT INTO hgs.place_files (place_idx, file_name, size)
+	VALUES (#{placeIdx},#{fileName},#{size})
+	</insert>
+	
+	</mapper>

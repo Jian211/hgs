@@ -17,34 +17,30 @@ class DemoApplicationTests {
 	private DataSource dataSource;
 	
 	private Connection conn;
-
+	
 	@Autowired
 	private SqlSessionFactory sqlSessionFactory;
 	
+
 	@Test
 	void contextLoads() {
 	}
 	
 	@Test
-	public void 커넥션생성테스트() throws SQLException {
-		System.out.println("dataSource : " + dataSource);
-		try {
-			conn = dataSource.getConnection();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public void 컨넥션생성테스트() throws SQLException {
 		
-		System.out.println("conn : " + conn );
+		System.out.println("dataSource --> " + dataSource);
+		
+		conn = dataSource.getConnection();
+		System.out.println("connction --> " + conn);
 		
 		conn.close();
+		
 	}
-
 	
 	@Test
-	public void 세션팩토리확생성() {
-		System.out.println("sqlSessionFactory : " + sqlSessionFactory);
-		
-		
+	public void 세션팩토리생성() {
+		System.out.println("sqlSessionFactory --> " + sqlSessionFactory);
 	}
 	
 }

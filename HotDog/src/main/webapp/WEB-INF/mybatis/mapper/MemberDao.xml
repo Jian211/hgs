@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- nameSpace에는 interface의 전체 경로를 입력 -->
+<mapper namespace="com.bitcamp.hgs.member.dao.MemberDao">
+
+	<!-- select의 결과를 매핑해주는 설정 -->
+	<resultMap type="com.bitcamp.hgs.member.domain.Member"
+		id="memberResult">
+		<id column="member_idx" property="index" />
+		<result column="email" property="email" />
+		<result column="pet_number" property="petNumber" />
+		<result column="name" property="userName" />
+		<result column="profile" property="profile" />
+		<result column="sex" property="sex" />
+		<result column="address" property="address" />
+		<result column="breed_idx" property="breedIdx" />
+		<result column="neutering" property="neutering" />
+	</resultMap>
+	<select id="selectByIdx"
+		resultType="com.bitcamp.hgs.member.domain.Member">
+
+		select * from members where member_idx=#{no}
+	</select>
+	
+
+	<update id="editMember"	parameterType="com.bitcamp.hgs.member.domain.UpdatePutMember">
+
+		UPDATE hgs.members
+		SET
+		pet_number = #{petNumber},
+		name = #{name},
+		profile = #{fileName},
+		birthday = #{birthday},
+		sex = #{sex},
+		address = #{address},
+		breed_idx = #{breedIdx},
+		neutering = #{neutering}
+		WHERE member_idx = #{memberIdx}
+				
+	</update>
+
+	<update id="editMemberHashtags"	parameterType="java.util.List">
+
+		UPDATE hgs.member_hashtags
+		SET
+		<foreach collection="">
+		
+		pet_number = #{petNumber},
+		name = #{name},
+		profile = #{fileName},
+		birthday = #{birthday},
+		sex = #{sex},
+		address = #{address},
+		breed_idx = #{breedIdx},
+		neutering = #{neutering}
+		</foreach>
+				
+		WHERE member_idx = #{memberIdx}
+	</update>
+
+	<select id="selectTotalCount" parameterType="hashMap"
+		resultType="int">
+
+		select count(*) from members
+		<where>
+			<if test="searchType != null">
+				<if test="searchType == 'uid'">
+					<include refid="searchId" />
+				</if>
+				<if test="searchType == 'uname'">
+					<include refid="searchName" />
+				</if>
+				<if test="searchType == 'both'">
+					<include refid="searchId" />
+					<include refid="searchName" />
+				</if>
+			</if>
+		</where>
+	</select>
+
+	<sql id="searchId">
+		or userid like concat('%', #{keyword}, '%')
+	</sql>
+
+	<sql id="searchName">
+		or user=name like concat('%', #{keyword}, '%')
+	</sql>
+
+	<select id="selectList"
+		parameterType="com.bitcamp.hgs.member.domain.SearchParams"
+		resultType="com.bitcamp.hgs.member.domain.Member">
+
+		select * from members
+
+		<where>
+			<if test="searchType != null">
+
+				<if test="searchType == 'uid'">
+					<include refid="searchId" />
+				</if>
+				<if test="searchType == 'uname'">
+					<include refid="searchName" />
+				</if>
+				<if test="searchType == 'both'">
+					<include refid="searchId" />
+					<include refid="searchName" />
+				</if>
+			</if>
+		</where>
+
+		order by member_idx limit #{index}, #{count}
+	</select>
+
+	<delete id="deleteByIdx">
+		delete from members where member_idx=#{idx}
+	</delete>
+	
+
+	
+	<!-- 로그인  하는 유저의 email 확인 및 존재하는 유저인지 확인 -->
+	<select id="selectMember" resultType="com.bitcamp.hgs.member.domain.Member" >	
+		select * from hgs.members where email = #{param1}
+	</select>
+
+	<!-- 	 -->
+	<insert id="insertMemberInfo" useGeneratedKeys="true"  keyProperty="memberIdx" parameterType="com.bitcamp.hgs.member.domain.InsertMember">
+		
+		insert into hgs.members (
+			email,
+			password,
+			pet_number,
+			name,
+			profile,
+			birthday,
+			sex,
+			address,
+			breed_idx,
+			neutering,
+			sns_id,
+			sns_type
+		) values (
+			#{email}, #{password}, #{petNumber}, #{name}, #{profile}, 
+			#{birthday}, #{sex}, #{address}, #{breedIdx}, #{neutering}, #{snsId}, #{snsType}
+		)
+	</insert>
+
+	<!-- 해시태그 추가하기  -->
+	<insert id="insertMemberHashtag" parameterType="java.util.List">
+		insert into hgs.member_hashtags 
+		values
+		<foreach collection="list" item="item" separator=",">
+		 ( #{item.memberIdx}, #{item.hashtagIdx})
+		</foreach>
+	</insert>
+
+	
+	<!-- 유저의 해시태그 정보 가져오기 -->
+	<select id="selectMemberHashtags" resultType="com.bitcamp.hgs.member.domain.Hashtag">
+		select hs.hashtag_idx, hs.tag from hgs.hashtags as hs
+		join hgs.member_hashtags as mhs
+		on mhs.hashtag_idx = hs.hashtag_idx
+		where mhs.member_idx = #{param1};
+	</select>
+	
+	
+	<!-- 해시태그 삭제 -->
+	<delete id="deleteMemberHashtags" parameterType="int">
+		DELETE FROM hgs.member_hashtags
+		WHERE member_idx = #{memberIdx};
+	</delete>
+	
+</mapper>

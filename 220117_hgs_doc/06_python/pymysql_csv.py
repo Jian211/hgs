@@ -8,7 +8,6 @@ conn = pymysql.connect(
     user= 'jian',
     password= 'jian',
     db= 'hgs',
-    # charset= 'uft-8' # 현재 이것 때문에 오류가 발생 이유 모름
 )
 cursor = conn.cursor(pymysql.cursors.DictCursor)
 
@@ -25,7 +24,7 @@ f = open('220131_dogCafeList.csv', 'r', encoding='utf-8')
 rd = csv.reader(f)
 
 for line in rd:
-    cursor.execute(insert_sql, ( line[0],line[1], line[2], line[3], line[4], line[5], line[6])) 
+    cursor.execute(insert_sql, ( line[0],line[1], line[2], line[4], line[3], line[5], line[6])) 
 conn.commit()
 conn.close()
 f.close

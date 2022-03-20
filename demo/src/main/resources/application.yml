@@ -12,7 +12,7 @@ spring:
     suffix: .html
     mode: HTML5
     cache: false
-    template-resolver-order: 
+    template-resolver-order: 0
     
 mybatis:
   mapper-locations: com/example/demo/member/mapper/*.xml

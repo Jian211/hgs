@@ -11,7 +11,7 @@ from soupsieve import select
 browser = webdriver.Chrome("./chromedriver.exe")  # 같은 경로안에 있으면 경로를 안적어 주어도 ok
 browser.maximize_window()   # 창 최대화
 # 파일 생성
-file_name = "test3sss.csv"  #"220131_dogCafeList.csv"
+file_name = "test444.csv"  #"220131_dogCafeList.csv"
 f = open(file_name, "w", encoding="utf-8-sig", newline="")
 writer = csv.writer(f)
 

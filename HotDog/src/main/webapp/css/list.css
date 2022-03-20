@@ -1,0 +1,37 @@
+.placeList-container{
+	margin : 0 280px;
+}
+
+.place-text-h3{
+	font-size: 45px;
+	font-weight: bold;
+}
+.place-text-h5{
+	font-size: 27px;
+	font-weight: normal;
+}
+
+#content{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.place-list{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.card {
+	margin:16px;
+	border-radius: 20px;
+}
+
+.card-img-top{
+	width : 286px;
+	height : 286px;
+}
+
+.bottom{
+	margin : 30px 0 50px 0;
+}

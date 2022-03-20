@@ -3,10 +3,10 @@ package com.bitcamp.hgs.home.domain;
 
 public class KakaoOauth {
 	
-    private final String CLIENT_ID = "c3d33077d50916de6b6521acf72299f7";
+    private final String CLIENT_ID = "43759419ecbf05fbee7b1064e2ea3094";
     private final String TOKEN_URL = "https://kauth.kakao.com/oauth/token";
     private final String API_URL = "https://kapi.kakao.com/v2/user/me";
-    private final String REDIRECT_URL = "http://localhost:8080/hgs/oauth/kakao";
+    private final String REDIRECT_URL = "http://localhost:8080/hgs/member/oauth/kakao";
     private final String GRANT_TYPE = "authorization_code";
     private String accessToken;
 	private String refreshToken;

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.bitcamp.hgs.board.dao.BoardReplyDao">
+
+	<select id="getList"
+			resultType="com.bitcamp.hgs.board.domain.BoardReplys">
+	SELECT board_reply_idx,
+		   board_idx,
+		   member_idx,
+		   content,
+		   create_date
+	FROM hgs.board_replys WHERE board_idx=${boardIdx}
+	</select>
+	
+	
+	<insert id="registReply"
+			parameterType="com.bitcamp.hgs.board.domain.BoardReplys"
+			useGeneratedKeys="true"
+			keyProperty="boardReplyIdx"
+	>
+	
+	INSERT INTO board_replys (board_idx, member_idx, content) 
+	VALUES (#{boardIdx}, #{memberIdx}, #{content})
+	
+	</insert>
+	
+	
+	
+	<delete id="deleteReply">
+		DELETE FROM hgs.board_replys WHERE board_reply_idx=#{boardReplyIdx}
+	</delete>
+	
+	<update id="updateReply">
+		UPDATE board_replys SET content=#{content}, editdate = sysdate WHERE board_reply_idx = #{boardReplyIdx}
+	</update>
+	
+	
+</mapper>

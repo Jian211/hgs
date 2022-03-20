@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--  namespace에는 interface의 전체 이름을 기입 -->
+<mapper namespace="com.bitcamp.hgs.home.dao.HomePlacesDao">
+
+	<!-- 검색 기능 -->
+	<select id="selectHomePlaceList" resultType="com.bitcamp.hgs.home.domain.HomeSelectPlace">
+		select 
+			p.place_idx as placeIdx,
+			p.title as title,
+		    p.subject_category as subjectCategory,
+		    pf.file_name as fileName,
+		    p.new_address as newAddress,
+		    h.tag as hashtags,
+		    ps.member_idx as scrapIdx
+		from hgs.places as p  
+		left join hgs.place_hashtags as ph on p.place_idx = ph.place_idx
+		left join hgs.hashtags as h on h.hashtag_idx = ph.hashtag_idx
+		left join hgs.place_replys as pr on pr.place_idx = p.place_idx
+		left join hgs.place_scraps as ps on ps.place_idx = p.place_idx
+		left join hgs.place_files as pf on pf.place_idx = p.place_idx
+		where h.tag like concat("%",#{param1},"%")
+		or p.title like concat("%",#{param1},"%")
+		or p.new_address like concat("%",#{param1},"%")
+		or p.place_idx = #{param2}
+		order by RAND() limit 10;	
+	</select>
+
+	<select id="selectPlaces" resultType="com.bitcamp.hgs.home.domain.HomePlace">
+		select place_idx,title,subject_category
+		from hgs.places 
+		where new_address like concat('%',#{param1},'%');
+	</select>
+	
+	<select id="selectScraps"	resultType="com.bitcamp.hgs.home.domain.HomePlaceScrap">
+		<if test="memberIdx"></if>
+		select p.place_idx,p.title,p.latitude,p.longitude,p.new_address
+		from hgs.places as p 
+		join hgs.place_scraps as s 
+		on s.member_idx = #{param1} 
+		and p.place_idx = s.place_idx;
+	</select>
+	
+	<!-- 등록된 유저의 주소를 기반으로 주변 가게들을 랜덤으로 10개를 뽑아 리스트로 리턴 -->
+	<select id="selectAllPlacesIdx" resultType="com.bitcamp.hgs.home.domain.HomePlaces">
+		select place_idx, title, subject_category,new_address 
+		from hgs.places 
+		where new_address 
+		like CONCAT
+			('%',
+				(select substring_index(address," ", 1) from hgs.members where member_idx = ${param1}),
+			'%')
+		order by RAND() limit 7;
+	</select>
+	
+	<!-- 등록된 유저의 주소를 기반으로 주변 가게들을 랜덤으로 10개를 뽑아 리스트로 리턴 -->
+	<select id="selectAllPlaces" resultType="com.bitcamp.hgs.home.domain.HomePlaces">
+		select place_idx, title, subject_category,new_address 
+		from hgs.places 
+		order by RAND() limit 7;
+	</select>
+	
+</mapper>

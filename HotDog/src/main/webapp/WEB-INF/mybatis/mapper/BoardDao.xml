@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.bitcamp.hgs.board.dao.BoardDao">
+
+	<!--  일반 게시물 전체  목록 보기 -->
+	<select id="selectList"
+			resultType="com.bitcamp.hgs.board.domain.Boards">	
+		SELECT 
+	   		b.board_idx,
+	   		b.title,
+       		bf.file_name
+    	FROM boards b left outer join board_files bf on (b.board_idx = bf.board_idx)
+        ORDER BY b.board_idx desc limit #{param1}, #{param2}
+	</select>
+	
+	<!-- 일반 게시물 상세보기 -->
+	<select id="selectByIdx"
+			resultType="com.bitcamp.hgs.board.domain.Boards">
+		SELECT
+	   		b.board_idx, 
+	   		b.title,
+       		b.content,
+       		bf.file_name
+       FROM boards b left outer join board_files bf on (b.board_idx = bf.board_idx)
+	   WHERE b.board_idx=#{idx} 
+	</select>
+	
+	<!-- 일반 게시물 등록 -->
+	<insert id="registBoard"
+			parameterType="com.bitcamp.hgs.board.domain.RegBoard"
+			useGeneratedKeys="true"
+			keyProperty="boardIdx">
+			
+		INSERT INTO hgs.boards (member_idx, title, content)
+ 	 VALUES (#{memberIdx},#{title},#{content})
+	</insert>
+	
+	<!-- 일반 게시물 삭제 -->
+	<delete id="deleteBoard">
+		DELETE FROM hgs.boards where board_idx=#{boardIdx}
+	</delete>
+	
+	<!-- 일반 게시물 수정 -->
+	<update id="updateBoard">
+		UPDATE hgs.boards SET
+		title = #{title},
+		contact = #{content},
+		where board_idx = #{boardIdx}
+	</update>
+	
+	<!-- 파일 등록  -->
+	<insert id="insertFile">
+	INSERT INTO hgs.board_files (board_idx, file_name, size)
+	VALUES (#{boardIdx},#{fileName},#{size})
+	</insert>
+	
+	</mapper>

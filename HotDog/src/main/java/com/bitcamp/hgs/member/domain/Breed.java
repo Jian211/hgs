@@ -7,12 +7,12 @@ public class Breed {
 	
 	public Breed() {	}
 
-	public Breed(int breedInd, String dogType) {
-		this.breedIdx = breedInd;
+	public Breed(int breedIdx, String dogType) {
+		this.breedIdx = breedIdx;
 		this.dogType = dogType;
 	}
 
-	public int getBreedInd() {
+	public int getBreedIdx() {
 		return breedIdx;
 	}
 
@@ -22,7 +22,7 @@ public class Breed {
 
 	@Override
 	public String toString() {
-		return "Breed [breedInd=" + breedIdx + ", dogType=" + dogType + "]";
+		return "Breed [breedIdx=" + breedIdx + ", dogType=" + dogType + "]";
 	}
 
 	

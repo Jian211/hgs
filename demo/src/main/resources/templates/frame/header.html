@@ -1,53 +1,28 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultrap.net.nz/thymeleaf/layout">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
 
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
 
-  <a class="navbar-brand mr-auto mr-lg-0" href="${pageContext.request.contextPath}">Open Project</a>
-  
-  <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+	<a class="navbar-brand mr-auto mr-lg-0"
+		href="${pageContext.request.contextPath}">Open Project</a>
 
-  <div class="navbar-collapse offcanvas-collapse ml-4" id="navbarsExampleDefault">
-    <ul class="navbar-nav mr-auto">
-    	
-	    <li class="nav-item">
-	    	<a class="nav-link" href="@{/member/reg}">회원 가입</a>
-	    </li>
-		<li class="nav-item">
-			<a class="nav-link" href="@{/member/manager/list}">회원 리스트</a></li>
-		<li class="nav-item">
-		<a class="nav-link" href="@{/member/my/mypage}">마이페이지</a></li>
-		
-		
-		<li class="nav-item">
-		<a class="nav-link" href="@{/member/login}">로그인</a></li>
-		
-		<li class="nav-item">
-		<a class="nav-link" href="@{/member/logout}">로그아웃</a></li>
-		
-		<li class="nav-item">
-		<a class="nav-link" href="@{/guestbook/write}">방명록 글쓰기</a></li>
-		<li class="nav-item">
-		<a class="nav-link" href="@{/guestbook/list}">방명록 리스트</a></li>
-    
-    </ul>
-    
-    <div>
-		<a class="btn btn-info btn-sm" href="@{/member/login}">login</a>
-	
-		<table>
-			<tr>
-				<td><img class="rounded" src="@{/uploadfile/${loginInfo.photo}}" style="height:25px;width:25px;"></td>
-				<td>
-				<span  class="text-warning">${loginInfo.userName}(${loginInfo.userId})</span> 
-				<a class="btn btn-info btn-sm" href="${pageContext.request.contextPath}/member/logout">logout</a>
-				</td>
-			</tr>
-		</table>
+	<button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+		<span class="navbar-toggler-icon"></span>
+	</button>
 
-    </div>
-    
-  </div>
+	<div class="navbar-collapse offcanvas-collapse ml-4" id="navbarsExampleDefault">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item"><a class="nav-link" th:href="@{/member/reg}">회원 가입</a></li>
+			<li class="nav-item"><a class="nav-link" th:href="@{/member/manager/list}">회원 리스트</a></li>
+			<li class="nav-item"><a class="nav-link" th:href="@{/member/my/mypage}">마이페이지</a></li>
+			<li class="nav-item"><a class="nav-link" th:href="@{/member/login}">로그인</a></li>
+			<li class="nav-item"><a class="nav-link" th:href="@{/member/logout}">로그아웃</a></li>
+			<li class="nav-item"><a class="nav-link" th:href="@{/guestbook/write}">방명록 글쓰기</a></li>
+			<li class="nav-item"><a class="nav-link" th:href="@{/guestbook/list}">방명록 리스트</a></li>
+		</ul>
+	</div>
 </nav>
+
+
+</html>

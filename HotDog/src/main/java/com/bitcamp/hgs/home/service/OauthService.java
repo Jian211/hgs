@@ -7,7 +7,6 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bitcamp.hgs.home.domain.KakaoOauth;
@@ -36,11 +35,12 @@ public class OauthService {
 				 
 				BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
 				StringBuilder sb = new StringBuilder();
-				sb.append("&"+kakaoOauth.getGRANT_TYPE());
-				sb.append("&"+kakaoOauth.getCLIENT_ID());
-				sb.append("&"+kakaoOauth.getREDIRECT_URL());
+				sb.append("grant_type="+ kakaoOauth.getGRANT_TYPE());
+				sb.append("&client_id="+kakaoOauth.getCLIENT_ID());
+				sb.append("&redirect_uri="+kakaoOauth.getREDIRECT_URL());
 				sb.append("&code="+code);
 				
+				System.out.println("sb : " +sb.toString());
 				bw.write(sb.toString());
 				bw.flush();
 				

@@ -1,91 +1,69 @@
 @charset "UTF-8";
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
 
-* {
-	margin:0;
-	padding:0;
-}
-
-header {
-	padding: 20px;
-	position: relative;
-}
-header>h1 {
-	font-style:	italic;
-}
-header>div {
-	width : 300px;
-	height : 50px;
-	
-	text-align: right;
-	
-	position: absolute;
-	right: 10px;
-	top: 5px;
-}
-header>div img {
-	height : 30px;
-	
-	border: 2px solid #aaa;
-	border-radius: 50%;
-}
-header>div>table td {
-	padding: 0 5px;
-}
-
-header>div a {
-	padding: 1px 3px;
-	font-size: 12px;
-	font-weight: bold;
-	
-	border: 1px solid #aaa;
-	border-radius: 3px;
-	
-	background-color: #EEE;
-	
-	text-decoration: none;
-}
-
-
-
-
-
-nav {
-	padding: 10px;
-	
-	border-top:1px solid #AAA;
-	border-bottom: 1px solid #AAA;
-}
-nav>ul {
-	list-style: none;
-	overflow: hidden;
-}
-nav>ul>li {
-	float: left;
-	padding: 0 15px;
-}
-
-nav+div {
-	padding: 30px;
-}
-nav+div>h3 {
-	font-style: italic;
-}
-nav+div>hr {
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
 	border: 0;
-	border-top: 1px solid #aaa;
-	
-	margin-top: 5px; 
-	margin-bottom: 15px;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
 }
 
 
+/* 내가 새롭게 추가한 것 */
+body{
+	margin : 0 280px;
+}
 
+.icon.solid:before{
+	font-weight: 900 !important;
+}
+.icon.brands:before{
+	font-family: 'Font Awesomme 5 Brands';
+}
 
+.icon.major{
+}
 
-
-
-
-
-
-
-
+.icon.major:before{
+	font-family: 'Font Awesome 5 Free','Font Awesomme 5 Brands';
+}

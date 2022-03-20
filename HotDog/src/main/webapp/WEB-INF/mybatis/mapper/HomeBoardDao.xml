@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--  namespace에는 interface의 전체 이름을 기입 -->
+<mapper namespace="com.bitcamp.hgs.home.dao.HomeBoardDao">
+		
+		<!-- 보드에 관한 검색  -->
+	 	<select id="selectHomeBoardList" parameterType="list"	resultType="com.bitcamp.hgs.home.domain.HomeBoard">
+			<if test="arg0 != null">
+				select  b.board_idx as board_idx,
+				        b.title as title,
+				        b.content as content,
+				        TIMESTAMPDIFF(hour, b.create_date, now()) as create_date,
+				        bf.file_name as file_name,
+				        m.name as name,
+				        likes,
+				        group_concat('#',h.tag) as tags
+				  
+				from 	hgs.boards as b
+				
+				left join	hgs.board_files as bf 	 on b.board_idx = bf.board_idx
+				left join	hgs.board_hashtags as bh on b.board_idx = bh.board_idx
+				left join 	hgs.hashtags as h 		 on h.hashtag_idx = bh.hashtag_idx
+				left join 	(select  board_idx ,count(board_idx) as likes from hgs.board_likes group by board_idx) as likes on likes.board_idx = b.board_idx
+				left join	hgs.members as m on m.member_idx = b.member_idx
+				
+				where b.board_idx 
+					in (
+							select distinct bhs.board_idx from hgs.hashtags as hs
+							join hgs.board_hashtags bhs
+							on hs.hashtag_idx = bhs.hashtag_idx
+							where 
+						    <foreach collection="list" item="item"  separator="or">
+								hs.tag like concat('%',#{item.tag},'%')	
+							</foreach>
+						)
+				group by b.board_idx
+				order by b.create_date desc, RAND() limit 3;
+			</if>
+			
+			<!-- 파라미터 값이 없을 때 -->
+			<if test="arg0 == null">
+					select  b.board_idx as board_idx,
+				        b.title as title,
+				        b.content as content,
+				        TIMESTAMPDIFF(hour, b.create_date, now()) as create_date,
+				        bf.file_name as file_name,
+				        m.name as name,
+				        likes,
+				        group_concat('#',h.tag) as tags
+				  
+				from 	hgs.boards as b
+				
+				left join	hgs.board_files as bf 	 on b.board_idx = bf.board_idx
+				left join	hgs.board_hashtags as bh on b.board_idx = bh.board_idx
+				left join 	hgs.hashtags as h 		 on h.hashtag_idx = bh.hashtag_idx
+				left join 	(select  board_idx ,count(board_idx) as likes from hgs.board_likes group by board_idx) as likes on likes.board_idx = b.board_idx
+				left join	hgs.members as m on m.member_idx = b.member_idx
+				
+				group by b.board_idx
+				order by b.create_date desc, RAND() limit 3;	
+			</if>
+	</select>
+
+
+	<select id="selectSearchBoardList" parameterType="string"	resultType="com.bitcamp.hgs.home.domain.HomeBoard">
+			select  b.board_idx as board_idx,
+			        b.title as title,
+			        b.content as content,
+			        TIMESTAMPDIFF(hour, b.create_date, now()) as create_date,
+			        bf.file_name as file_name,
+			        m.name as name,
+			        likes,
+			        group_concat('#',h.tag) as tags
+			  
+			from 	hgs.boards as b
+			
+			left join	hgs.board_files as bf 	 on b.board_idx = bf.board_idx
+			left join	hgs.board_hashtags as bh on b.board_idx = bh.board_idx
+			left join 	hgs.hashtags as h 		 on h.hashtag_idx = bh.hashtag_idx
+			left join 	(select  board_idx ,count(board_idx) as likes from hgs.board_likes group by board_idx) as likes on likes.board_idx = b.board_idx
+			left join	hgs.members as m on m.member_idx = b.member_idx
+			
+			where h.tag like CONCAT("%",#{param1},"%") 
+			or b.title like CONCAT("%",#{param1},"%")
+			group by b.board_idx
+			order by b.create_date desc;
+			<!-- RAND() limit 10; -->
+	</select>
+</mapper>
