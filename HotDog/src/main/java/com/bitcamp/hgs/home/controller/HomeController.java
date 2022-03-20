@@ -44,11 +44,9 @@ public class HomeController {
 	}
 	
 	
-	// 로그인 확인 
+	// ログイン確認  - 로그인 확인 
 	@PostMapping("/login")
 	public String login(LoginFormInfo loginFormInfo, HttpSession session, HttpServletResponse res) {
-		System.out.println("무슨ㄷ일이야");
-		System.out.println(loginFormInfo);
 		return loginService.checkMember(loginFormInfo, session, res);
 	}
 	

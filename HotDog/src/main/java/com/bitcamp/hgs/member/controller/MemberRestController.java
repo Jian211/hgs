@@ -27,32 +27,26 @@ public class MemberRestController {
 		this.service = service;
 	}
 	
-	
-	// Mypage
-	@GetMapping("/{idx}")
+	@GetMapping("/{idx}") 
 	public String getMember(@PathVariable("idx") int memberIdx, Model model) {
 		return service.getMember(memberIdx, model);
 	}
 	
-	// Member Insert
 	@PostMapping
 	public void joinMember(RegMember regMember, HttpServletRequest request) throws IllegalStateException, IOException {
 		service.insertMember(regMember, request);
 	}
-	
-	// SNS Member Insert
-	@PostMapping("/oauth/member")
+
+	@PostMapping("/oauth/member") 	// SNS Member Insert
 	public void joinOauthMember(RegMember regMember, HttpServletRequest request) throws IllegalStateException, IOException {
 		service.insertMember(regMember, request);
 	}
 	
-	// Member Edit :: putMapping or patchMapping으로 해보고 싶었지만, 서치해본 결과 버그라고 하든디..
-	@PostMapping("/{idx}") 
+	@PostMapping("/{idx}") // Member Edit :: putMapping or patchMapping error!!!
 	public void editMember(PutMember putMember,HttpSession session, @PathVariable("idx") int memberIdx, HttpServletRequest request) { 
 		service.editMember(putMember,memberIdx,request);
 	}
 	
-	// Member Delete
 	@DeleteMapping("/{idx}") 
 	public String deleteMember(@PathVariable("idx") int memberIdx, HttpSession session) {
 		return service.deleteMember(memberIdx, session);

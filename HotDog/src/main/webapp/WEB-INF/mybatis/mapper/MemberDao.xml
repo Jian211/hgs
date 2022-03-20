@@ -119,8 +119,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	
 
-	
 	<!-- 로그인  하는 유저의 email 확인 및 존재하는 유저인지 확인 -->
+	
 	<select id="selectMember" resultType="com.bitcamp.hgs.member.domain.Member" >	
 		select * from hgs.members where email = #{param1}
 	</select>
@@ -156,8 +156,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</foreach>
 	</insert>
 
-	
 	<!-- 유저의 해시태그 정보 가져오기 -->
+	
 	<select id="selectMemberHashtags" resultType="com.bitcamp.hgs.member.domain.Hashtag">
 		select hs.hashtag_idx, hs.tag from hgs.hashtags as hs
 		join hgs.member_hashtags as mhs
