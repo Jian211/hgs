@@ -17,13 +17,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				        m.name as name,
 				        likes,
 				        group_concat('#',h.tag) as tags
-				  
 				from 	hgs.boards as b
-				
 				left join	hgs.board_files as bf 	 on b.board_idx = bf.board_idx
 				left join	hgs.board_hashtags as bh on b.board_idx = bh.board_idx
 				left join 	hgs.hashtags as h 		 on h.hashtag_idx = bh.hashtag_idx
-				left join 	(select  board_idx ,count(board_idx) as likes from hgs.board_likes group by board_idx) as likes on likes.board_idx = b.board_idx
+				left join 	(select  board_idx ,count(board_idx) as likes from hgs.board_likes group by board_idx) as likes 
+							on likes.board_idx = b.board_idx
 				left join	hgs.members as m on m.member_idx = b.member_idx
 				
 				where b.board_idx 
@@ -33,14 +32,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 							on hs.hashtag_idx = bhs.hashtag_idx
 							where 
 						    <foreach collection="list" item="item"  separator="or">
-								hs.tag like concat('%',#{item.tag},'%')	
+								hs.tag like CONCAT('%',#{item.tag},'%')	
 							</foreach>
 						)
 				group by b.board_idx
-				order by b.create_date desc, RAND() limit 3;
+				order by b.create_date DESC, RAND() limit 3;
 			</if>
 			
-			<!-- 파라미터 값이 없을 때 -->
 			<if test="arg0 == null">
 					select  b.board_idx as board_idx,
 				        b.title as title,
@@ -56,7 +54,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				left join	hgs.board_files as bf 	 on b.board_idx = bf.board_idx
 				left join	hgs.board_hashtags as bh on b.board_idx = bh.board_idx
 				left join 	hgs.hashtags as h 		 on h.hashtag_idx = bh.hashtag_idx
-				left join 	(select  board_idx ,count(board_idx) as likes from hgs.board_likes group by board_idx) as likes on likes.board_idx = b.board_idx
+				left join 	(select  board_idx ,count(board_idx) as likes from hgs.board_likes group by board_idx) as likes
+							on likes.board_idx = b.board_idx
 				left join	hgs.members as m on m.member_idx = b.member_idx
 				
 				group by b.board_idx

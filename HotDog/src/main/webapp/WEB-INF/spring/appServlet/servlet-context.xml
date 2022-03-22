@@ -33,19 +33,18 @@
 		</beans:property>
 	</beans:bean>
 	
+	
+	
+	<beans:bean id="authCheckInterceptor" class="com.bitcamp.hgs.home.interceptor.AuthCheckInterCeptor"/>
+	
 	<!--  클래스 생성하면 경로 확인 후 수정 할 것 -->
-	<!-- <beans:bean id="authCheckInterceptor" class="com.bitcamp.op.member.interceptor.AuthCheckInterceptor"/> -->
-	
-	
-	
-	<!--  클래스 생성하면 경로 확인 후 수정 할 것 -->
-	<!-- 로그인 여부 확인을 위한 인터셉터 등록 -->
-<!-- 	<interceptors> -->
-<!-- 		<interceptor> -->
-<!-- 			<mapping path="/login"/> -->
-<!-- 			<beans:ref bean="LoginChangePwToHash"/> -->
-<!-- 		</interceptor> -->
-<!-- 	</interceptors> -->
+	<!--  로그인 여부 확인을 위한 인터셉터 등록 -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/**"/>
+			<beans:ref bean="authCheckInterceptor"/>
+		</interceptor>
+	</interceptors>
 	
 	
 	<!-- 메일도 수정 -->

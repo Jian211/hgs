@@ -178,7 +178,7 @@ joinBtn.onclick = function(){
 	//const pathUrl = `${pathContext.request.contextPath}/member/oauth`;
 	
 	$.ajax({
-		url : 'test',
+		url : 'member',
 		type : 'POST',
 		data : formData,
 		enctype : 'multipart/form-data',

@@ -7,7 +7,7 @@
 	<meta charset="utf-8">
 	<title>Weather</title>
 	<%@ include file="/WEB-INF/views/frame/pageSet.jsp"%>
-	<link rel="stylesheet" href="css/home.css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/home.css" />
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c3d33077d50916de6b6521acf72299f7&libraries=services"></script>
 </head>
 
@@ -25,9 +25,9 @@
 		<div class="weather">
 			<div>
 				<span class="weather_date" id="today"></span>
-				<span class="weather_temp">현재 </span>
+				<span class="weather_temp">現在 </span>
 				<span class="ctemp"></span>
-				<span class="weather_temp">도 입니다.</span>
+				<span class="weather_temp">度です。</span>
 			</div>
 			<div class="comment">
 				<!-- <span class="cicon"></span> -->
@@ -46,7 +46,7 @@
 			<!-- 지도 위에  유저의 스크랩한 장소들을 표시하기 -->
 			<div>
 				<div class="logger-map-container standard-box box-outside">
-					<div class="logger-map_location-text" style="font-size: 22px; padding : 0 10px 10px;">현재위치 및 스크랩장소 정보</div>
+					<div class="logger-map_location-text" style="font-size: 22px; padding : 0 10px 10px;">現在の位置及びスクラップ場所の情報</div>
 					<div class="">
 						<div id="map" style="width: 500px; height: 460px; border-radius: 20px"></div>
 					</div>
@@ -99,23 +99,6 @@
 		</div>
 	</div>	
 </body>
-<script>
-// 	$(".mypage").on("click",function(){
-		
-// 		$.ajax({
-// 			url :"/hgs/member",
-// 			data : { "idx" : ${logger.memberIdx} },
-// 			type :"get",
-// 		}).done(function(data){
-// 			console.log("성거ㅗㅇ입니다")
-// 			console.log(data)
-// 			location.href = ""
-			
-// 		}).fail(function(){
-// 			console.log("실패입니다")
-// 		});
-// 	})
-</script>
 
 <script>
 
@@ -175,25 +158,11 @@
 		}
 	})
 	
-	// 서치 검색 결과 시, 일어날 함수
-// 	function searchAfter(list){
-// 		const parkList = list.homePark;
-// 		const cafeList = list.homeCafe;
-// 		const hospitalList = list.homeHospital;
-// 		const boardList = list.homeBoard;
-		
-// 		parkList.forEach(function(item,index,arr2){
-// 			$(".board-content").append()
-// 		}
-
-// 	}
 </script>
 <script>
-
 	// $API_KEY = "f25a266c07e9c4b842b6386b1068e10a";
-	
+
 	const COORDS = "coords";
-	
 	function getWeather(lat, lon) {
 	    fetch("https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=f25a266c07e9c4b842b6386b1068e10a&units=metric")
 	        .then(res => res.json())
@@ -217,9 +186,9 @@
 	            $('.cicon').append('<img src="http://openweathermap.org/img/w/' + wIcon + '.png" />')
 	            
 	            if(description == "Clear" && description == "Clouds") {
-	                $('.recomm').append("산책하기 좋은 날씨에요!");
+	                $('.recomm').append("散歩しに行きますか!");
 	            } else {
-	                $('.recomm').append("주인님에게 한번 나가자구 해볼까요?");
+	                $('.recomm').append("散歩しに行きますか!");
 	            }
 			
 	        });
@@ -330,60 +299,7 @@
 	
 	
 </script>
-<script>
-   /*
-	var homeScrapList = [];
-	//현재 위치 기반으로 주변 정보(카페,병원 등) 데이터를 받아오기
-	if (navigator.geolocation) {
-	    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-	    navigator.geolocation.getCurrentPosition(function(position) {
-	        
-	        var lat = position.coords.latitude, // 위도
-	            lon = position.coords.longitude; // 경도
-	         
-	 		// 위도와 경도로 주소를 찾는 메소드
-	   		var geocoder = new kakao.maps.services.Geocoder();
-	   		var coord = new kakao.maps.LatLng(lat, lon);
-	   	
-	   		var callback = function(result, status) {
-	   		    if (status === kakao.maps.services.Status.OK) {
-	   		    	var maker = result[0].address;
-	   		    	address = maker.region_1depth_name+" "+maker.region_2depth_name; //+" "+maker.region_3depth_name;
-						
-	   		    	$.ajax({
-	   		    		url :"home/places",
-	   		    		data :{
-	   		    			'address': address
-	   		    		},
-	   		    		contentType :'application/json; charset=UTF-8',
-	   		    		type :"get"
-	   		    	}).done(function(data){
-	   		    		
-	   		    		// 배열에 데이터 삽입
-	   		    		for (var i = 0; i < data.length; i++) {
- 		   		    		homeScrapList.push(JSON.stringify(data))
-						}
-	   		    		console.log("homeScrapList = "+ homeScrapList)
-	   		    	}).fail(function(){
-	   		    		console.log("유저의 스크랩 정보를 찾지 못했습니다.")
-	   		    	});
-	   		    }
-	   		};
-	   		geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
-	   		
-		})
-	}
-	
-	// 받은 데이터를 배열 형식으로 변환하는 함수
-	function insertJsonData(data){
-		console.log(data)
-		for (var i = 0; i < array.length; i++) {
-			var array_element = array[i];
-			
-		}
-	}
-	*/
-	
+<script>	
 	// 마커를 표시할 위치와 title 객체 배열입니다 
 	// 여기다가 유저가 좋아하는 것들을 받아오기
 	

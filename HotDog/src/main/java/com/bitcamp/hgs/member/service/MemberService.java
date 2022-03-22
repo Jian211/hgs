@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.bitcamp.hgs.home.service.BreedService;
 import com.bitcamp.hgs.member.dao.MemberDao;
 import com.bitcamp.hgs.member.domain.BasicTagList;
 import com.bitcamp.hgs.member.domain.InsertMember;
@@ -162,7 +163,7 @@ public class MemberService {
 		model.addAttribute("breedList", breedService.getDogTypeList());
 		model.addAttribute("hashtags", template.getMapper(MemberDao.class).selectMemberHashtags(memberIdx));
 		model.addAttribute("basicTagList", new BasicTagList().getBTL());
-		return "/hgs/member/mypage";
+		return "member/mypage";
 	}
 	
 }

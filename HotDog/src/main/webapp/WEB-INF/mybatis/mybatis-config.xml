@@ -17,7 +17,7 @@
 		</settings>
 		
 		<mappers>
-			<mapper class="com.bitcamp.hgs.member.dao.BreedDao" />
+			<mapper class="com.bitcamp.hgs.home.dao.BreedDao" />
 		</mappers>
 
 		

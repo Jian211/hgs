@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bitcamp.hgs.home.domain.Breed;
 import com.bitcamp.hgs.home.domain.EmailType;
+import com.bitcamp.hgs.home.service.BreedService;
 import com.bitcamp.hgs.home.service.LoginService;
 import com.bitcamp.hgs.home.service.OauthService;
-import com.bitcamp.hgs.member.domain.Breed;
 import com.bitcamp.hgs.member.domain.Member;
-import com.bitcamp.hgs.member.service.BreedService;
 import com.bitcamp.hgs.member.service.MemberService;
 
 

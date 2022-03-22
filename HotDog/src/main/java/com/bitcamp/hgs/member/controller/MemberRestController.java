@@ -29,6 +29,7 @@ public class MemberRestController {
 	
 	@GetMapping("/{idx}") 
 	public String getMember(@PathVariable("idx") int memberIdx, Model model) {
+		System.out.println("memberIdx = "+ memberIdx);
 		return service.getMember(memberIdx, model);
 	}
 	
@@ -51,5 +52,4 @@ public class MemberRestController {
 	public String deleteMember(@PathVariable("idx") int memberIdx, HttpSession session) {
 		return service.deleteMember(memberIdx, session);
 	}
-	
 }

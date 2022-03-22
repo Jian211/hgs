@@ -120,14 +120,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 
 	<!-- 로그인  하는 유저의 email 확인 및 존재하는 유저인지 확인 -->
-	
 	<select id="selectMember" resultType="com.bitcamp.hgs.member.domain.Member" >	
 		select * from hgs.members where email = #{param1}
 	</select>
 
-	<!-- 	 -->
 	<insert id="insertMemberInfo" useGeneratedKeys="true"  keyProperty="memberIdx" parameterType="com.bitcamp.hgs.member.domain.InsertMember">
-		
 		insert into hgs.members (
 			email,
 			password,
@@ -147,7 +144,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</insert>
 
-	<!-- 해시태그 추가하기  -->
+	<!-- Member hashTag Save  -->
 	<insert id="insertMemberHashtag" parameterType="java.util.List">
 		insert into hgs.member_hashtags 
 		values
@@ -156,8 +153,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</foreach>
 	</insert>
 
-	<!-- 유저의 해시태그 정보 가져오기 -->
 	
+	<!-- get User Hash Tag -->
 	<select id="selectMemberHashtags" resultType="com.bitcamp.hgs.member.domain.Hashtag">
 		select hs.hashtag_idx, hs.tag from hgs.hashtags as hs
 		join hgs.member_hashtags as mhs
@@ -166,7 +163,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
-	<!-- 해시태그 삭제 -->
+	<!-- Delete Hashtag -->
 	<delete id="deleteMemberHashtags" parameterType="int">
 		DELETE FROM hgs.member_hashtags
 		WHERE member_idx = #{memberIdx};

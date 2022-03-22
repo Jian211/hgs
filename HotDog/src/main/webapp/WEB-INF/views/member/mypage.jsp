@@ -5,7 +5,8 @@
 <head>
 	<title>会員情報</title> <!-- 회원정보 -->
 	<meta charset="UTF-8">
-	<%@ include file="/WEB-INF/views/frame/pageform.jsp"%>
+	<%@ include file="/WEB-INF/views/frame/pageSet.jsp"%>
+<%-- 	<%@ include file="/WEB-INF/views/frame/pageform.jsp"%> --%>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/mypage.css">
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<style>
@@ -15,6 +16,15 @@
 			font-size: large;
 		}
 	</style>
+	 <link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+	integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
+	crossorigin="anonymous">
+
+	<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+	crossorigin="anonymous"></script>
 </head>
 <body>
 

@@ -1,4 +1,4 @@
-package com.bitcamp.hgs.member.domain;
+package com.bitcamp.hgs.home.domain;
 
 public class Breed {
 	
