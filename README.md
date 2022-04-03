@@ -15,14 +15,4 @@
    API|KakaoMap,kakao Address, Kakao Login, Naver Login, OpenWeatherS
    OS|window10
    
- - 기능 설명(주요기능을 설명 명확한 용어를 사용)
- - 프로젝트 아키텍처
- - 담당 역할 및 문제 해결 및 성과를 간단히 핵심 요약정리
-    어떤 기능인지
-    어떻게 구현했는지
-    구현중 문제점
-    문제 해결방법
- - 산출물 링크 또는 첨부
-   기능 정의서
-   페이지 기획서
-   화면 설계 또는 목업
+ 
